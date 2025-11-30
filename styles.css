@@ -36,9 +36,17 @@ body {
 }
 
 .countdown {
-    margin: 0;
-    font-size: 0.95rem;
-    opacity: 0.9;
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-family: "JetBrains Mono", monospace;
+    color: #ffffff;
+    margin-bottom: 2rem;
+
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.2),
+        0 0 12px rgba(255, 255, 255, 0.15);
 }
 
 /* wreath styles */
