@@ -10,19 +10,27 @@ body {
     margin: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         sans-serif;
-    background-color: #1f2933;
-    color: #f9fafb;
     min-height: 100vh;
 
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+
+    /* oben dein Soft Charcoal, unten "Bühne" */
+    background: linear-gradient(to bottom,
+            #1F2933 0%,
+            #1F2933 68%,
+            #050608 68%,
+            #050608 100%);
+
+    color: #f9fafb;
 }
+
 
 /* Main app container */
 .advent-app {
     width: 100%;
-    max-width: 480px;
+    /* max-width: 480px; */
     padding: 2rem 1.5rem 3rem;
 }
 
@@ -36,26 +44,39 @@ body {
 }
 
 .countdown {
-    margin-top: 1rem;
     text-align: center;
-    font-size: 1.4rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    margin-bottom: 2.2rem;
     font-family: "JetBrains Mono", monospace;
-    color: #ffffff;
-    margin-bottom: 2rem;
-
-    text-shadow: 0 0 6px rgba(255, 255, 255, 0.2),
-        0 0 12px rgba(255, 255, 255, 0.15);
 }
+
+/* große Zahlen */
+.countdown-time {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #F2F5F7;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+    margin-bottom: 0.6rem;
+}
+
+
+/* Timezone – klein & dezent */
+.countdown-tz {
+    display: block;
+    font-size: 0.9rem;
+    color: #F2F5F7;
+    opacity: 0.6;
+    margin-top: 0.6rem;
+}
+
 
 /* wreath styles */
 .candles-container {
-    margin: 2rem auto 0;
-    width: 280px;
-    height: 220px;
-    --candle-height: 220px;
-    /* Adjusted for visual balance */
+    margin: 2.5rem auto 0;
+    width: 520px;
+    height: 260px;
+    --candle-height: 200px;
     position: relative;
 
     display: flex;
@@ -64,10 +85,10 @@ body {
 }
 
 .candle {
-    width: 42px;
-    height: 140px;
+    width: 70px;
+    height: 200px;
     position: relative;
-    --candle-height: 140px;
+    --candle-height: 200px;
     /* gleiche Höhe wie .candle */
 
     display: flex;
@@ -86,9 +107,9 @@ body {
     border-radius: 8px;
 
     box-shadow:
-        inset -4px 0 8px rgba(0, 0, 0, 0.18),
-        inset 4px 0 8px rgba(255, 255, 255, 0.4),
-        0 4px 8px rgba(0, 0, 0, 0.25);
+        inset -16px 0 0px rgba(0, 0, 0, 0.1),
+        inset 16px 0 0px rgba(255, 255, 255, 0.4),
+        0 8px 8px rgba(0, 0, 0, 0.25);
 
     transform-origin: bottom center;
     transform: scaleY(var(--wax-scale, 1));
@@ -101,8 +122,8 @@ body {
     left: 50%;
     transform: translateX(-50%);
 
-    width: 14px;
-    height: 22px;
+    width: 20px;
+    height: 50px;
     border-radius: 50%;
     background: radial-gradient(ellipse at center,
             #ffd27d 0%,
@@ -115,9 +136,88 @@ body {
     opacity: 0;
     transition:
         opacity 0.4s ease,
-        bottom 0.8s ease-out;
+        bottom 1.6s ease-out;
 }
 
 .candle.active .flame {
     opacity: 1;
+    animation: flame-flicker 0.8s infinite ease-in-out;
+
+    will-change: transform, opacity;
+}
+
+.candle:nth-child(2).active .flame {
+    animation-delay: 0.2s;
+}
+
+.candle:nth-child(3).active .flame {
+    animation-delay: 0.4s;
+}
+
+.candle:nth-child(4).active .flame {
+    animation-delay: 0.1s;
+}
+
+@keyframes flame-flicker {
+
+    0%,
+    100% {
+        transform: translateX(-50%) scaleY(1);
+        opacity: 0.9;
+    }
+
+    25% {
+        transform: translateX(-50%) scaleY(1.05) translateY(-0.5px);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateX(-50%) scaleY(0.95);
+        opacity: 0.85;
+    }
+
+    75% {
+        transform: translateX(-50%) scaleY(1.02) translateY(1px);
+        opacity: 0.95;
+    }
+}
+
+@media (max-width: 800px) {
+    .candles-container {
+        width: 90vw;
+        /* nimmt 90 % der Bildschirmbreite */
+        height: 220px;
+        --candle-height: 180px;
+        justify-content: space-evenly;
+    }
+
+    .candle {
+        width: 52px;
+        height: 180px;
+        --candle-height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .candles-container {
+        width: 95vw;
+        height: 190px;
+        --candle-height: 150px;
+    }
+
+    .candle {
+        width: 44px;
+        height: 150px;
+        --candle-height: 150px;
+    }
+
+    .candle .flame {
+        width: 12px;
+        height: 24px;
+    }
+
+    .countdown-time {
+        font-size: 2.3rem;
+        /* Countdown auf Handy etwas kleiner */
+    }
 }
