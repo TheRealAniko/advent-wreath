@@ -65,3 +65,51 @@ export const applyAdventToCandles = (adventNumber) => {
         candle.classList.toggle("inactive", !isActive);
     });
 };
+
+/**
+ * Updates the burn progress of each candle.
+ * Model:
+ * - Candle i starts burning on adventSundays[i]
+ * - and burns down gradually until Christmas Eve.
+ * 
+ * today: Date object (can be mocked for testing)
+ * adventSundays: array of 4 Date objects
+ * christmasEve: Date object
+ */
+export const updateCandleBurnProgress = (today, adventSundays, christmasEve) => {
+    const candles = document.querySelectorAll(".candle");
+    if (!candles.length || adventSundays.length !== 4) return;
+
+    const todayTime = today.getTime();
+    const christmasTime = christmasEve.getTime();
+
+    candles.forEach((candle, index) => {
+        const startDate = adventSundays[index];
+        const startTime = startDate.getTime();
+
+        let progress = 0;
+
+        if (todayTime <= startTime) {
+            // Befor this candle's Advent: not burned at all
+            progress = 0;
+        } else if (todayTime >= christmasTime) {
+            // After Christmas Eve: fully burned
+            progress = 1;
+        } else {
+            // During this candle's Advent: calculate progress
+            const total = christmasTime - startTime;
+            const elapsed = todayTime - startTime;
+            progress = elapsed / total;
+        }
+
+        // Clamp progress between 0 and 1
+        const clamped = Math.max(0, Math.min(1, progress));
+
+        // Map progress (0-1) to a scale factor
+        // 1.0 = full height, 0.3 = almost burned down
+        const minScale = 0.3;
+        const scale = 1 - (1 - minScale) * clamped;
+
+        candle.style.setProperty("--wax-scale", scale.toFixed(3));
+    });
+};
