@@ -1,0 +1,92 @@
+/* Global reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Page layout */
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    background-color: #1f2933;
+    color: #f9fafb;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Main app container */
+.advent-app {
+    width: 100%;
+    max-width: 480px;
+    padding: 2rem 1.5rem 3rem;
+}
+
+.app-header {
+    text-align: center;
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 1.6rem;
+}
+
+.countdown {
+    margin: 0;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+/* wreath styles */
+.candles-container {
+    margin: 2rem auto 0;
+    width: 280px;
+    height: 220px;
+    position: relative;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.candle {
+    width: 42px;
+    height: 140px;
+    position: relative;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.candle .wax {
+    width: 100%;
+    height: 100%;
+    background: #f9fafb;
+    border-radius: 8px;
+
+    box-shadow:
+        inset -4px 0 8px rgba(0, 0, 0, 0.18),
+        inset 4px 0 8px rgba(255, 255, 255, 0.4),
+        0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.candle .flame {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 14px;
+    height: 22px;
+    border-radius: 50% 50% 50% 50%;
+    background: radial-gradient(ellipse at center,
+            #ffd27d 0%,
+            #ff9a1f 60%,
+            rgba(255, 154, 31, 0) 100%);
+    ;
+}
