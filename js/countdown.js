@@ -29,8 +29,8 @@ export const setupCountdown = (targetDate, element) => {
 
         if (diff <= 0) {
             element.innerHTML = `
-    <span class="countdown-time">It is Christmas Eve! </span>
-    <span class="countdown-tz">${TIMEZONE_LABEL}</span>
+    <p class="countdown-time">It is Christmas Eve! </p>
+    <p class="countdown-tz">${TIMEZONE_LABEL}</p>
   `;
             return;
         }
@@ -41,15 +41,15 @@ export const setupCountdown = (targetDate, element) => {
         const seconds = Math.floor((diff % MS.MINUTE) / MS.SECOND);
 
         element.innerHTML = `
-  <span class="countdown-time">
+  <p class="countdown-time">
     ${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s
-  </span>
-  <span class="countdown-label">
+  </p>
+  <p class="countdown-label">
     until Christmas Eve
-  </span>
-  <span class="countdown-tz">
+  </p>
+  <p class="countdown-tz">
     ${TIMEZONE_LABEL}
-  </span>
+  </p>
 `;
     };
 
